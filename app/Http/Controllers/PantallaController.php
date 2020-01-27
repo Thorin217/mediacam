@@ -77,7 +77,14 @@ class PantallaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $fechafin = \Carbon\Carbon::now()->addDays(8)->format('Y-m-d');
+        $user = User::find($request->cliente);
+        if($user->status == 'no-activo'){
+            $user->update(['status' => 'activo']);
+        }
+
+        $user->update(['fecha_fin' => $fechafin]);
         // guardar los articulos para el cliente
         foreach ($request->pantallas as $pantalla) {
             $busqueda = Pantalla::where('name',$pantalla)->first();

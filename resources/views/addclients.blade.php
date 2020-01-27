@@ -39,10 +39,21 @@
                 @enderror
               </div>
               <div class="form-group">
+                <label for="country_id">País</label>
                 <select name="country_id" id="country_id" class="form-control form-control-pu">
                   @foreach ($paises as $pais)
                     <option value="{{$pais->id}}" @if($pais->id == Auth::user()->country_id) selected @endif disabled>{{$pais->name}}</option>
                   @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="tiempo_vida">Tiempo activo</label>
+                <select name="tiempo_vida" id="tiempo_vida" class="form-control form-control-pu">
+                    <?php 
+                      for($i = 5; $i<=30; $i++){
+                        echo '<option value="'.$i.'">'.$i .' dias</option>';
+                      }  
+                    ?>
                 </select>
               </div>
               <div class="form-group text-center">

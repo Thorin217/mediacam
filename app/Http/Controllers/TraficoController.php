@@ -61,6 +61,8 @@ class TraficoController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
+        $fechafin = \Carbon\Carbon::now()->addDay($request->tiempo_vida)->format('Y-m-d');
+        
         //verifica si el usuario tiene permiso y guarda el cliente
        if(Auth::user()->hasPermission('store_clients')){
             $cliente = User::create([
@@ -69,6 +71,7 @@ class TraficoController extends Controller
                 'password' =>  bcrypt($request->password),
                 'role_id' => $request->role_id,
                 'country_id' => Auth::user()->country_id,
+                'fecha_fin' => $fechafin,
             ]);
 
             return back()->with('status','Se agrego con éxito el cliente ' . $cliente->name );
@@ -88,8 +91,12 @@ class TraficoController extends Controller
         //busca el cliente y retorna la vista con los articulos para agregar
         $client = User::find($id);
         $pantallas = Pantalla::where('status','disponible')->where('country_id',Auth::user()->country_id)->orderBy('name','ASC')->get();
-
-        return view('pantallas.addArticulos',compact('client','pantallas'));
+        $articulos = PantallaCliente::select('pantallas.*','pantalla_clientes.created_at as fecha','pantalla_clientes.id as articulo')
+            ->join('pantallas','pantallas.id','pantalla_clientes.pantalla_id')
+            ->where('pantalla_clientes.user_id',$client->id)
+            ->orderBy('pantalla_clientes.created_at','DESC')
+            ->get();
+        return view('pantallas.addArticulos',compact('client','pantallas','articulos'));
     }
 
     /**

@@ -63,7 +63,7 @@
                         <a href="https://www.instagram.com/grupo_publimovil/?hl=es-la" target="_blank"><i class="fa fa-instagram fa-2x text-white" aria-hidden="true"></i></a>
                     </div>
                     <div class="col-2 info">
-                        <a href="http://www.grupopublimovil.com"><i class="fa fa-globe fa-2x" style="color:#FF3C00" aria-hidden="true"></i></a>
+                        <a href="http://www.grupopublimovil.com" target="_blank"><i class="fa fa-globe fa-2x" style="color:#FF3C00" aria-hidden="true"></i></a>
                     </div>
                 </div>
           </li>

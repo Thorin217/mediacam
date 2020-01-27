@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-lg-10 col-md-10 col-xs-12 col-12">
+        <div class="col-lg-8 col-md-8 col-xs-12 col-12">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
