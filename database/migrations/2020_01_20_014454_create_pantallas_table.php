@@ -20,7 +20,7 @@ class CreatePantallasTable extends Migration
             $table->string('image',255);
             $table->string('location',255);
             $table->string('status',25);
-            $table->string('country',60);
+            $table->unsignedBigInteger('country_id');
             $table->timestamps();
         });
     }
