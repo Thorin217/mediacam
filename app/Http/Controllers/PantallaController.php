@@ -19,6 +19,11 @@ class PantallaController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->fecha_fin <= \Carbon\Carbon::now() && Auth::user()->role_id == 3){
+            $user = User::find(Auth::user()->id);
+            $user->update(['status' => 'no-activo']);
+            return redirect()->route('mediacam.contacts');
+        }
         //verifica si el usuario tiene los permisos
        if(Auth::user()->hasPermission('view_cameras' && Auth::user()->status == 'activo')){
            //busca el usuario y su pais
@@ -78,20 +83,17 @@ class PantallaController extends Controller
      */
     public function store(Request $request)
     {   
-        $fechafin = \Carbon\Carbon::now()->addDays(8)->format('Y-m-d');
+         
         $user = User::find($request->cliente);
         if($user->status == 'no-activo'){
             $user->update(['status' => 'activo']);
         }
 
-        $user->update(['fecha_fin' => $fechafin]);
+        $user->update(['fecha_fin' => \Carbon\Carbon::now()->addDays(5)->format('Y-m-d')]);
         // guardar los articulos para el cliente
         foreach ($request->pantallas as $pantalla) {
             $busqueda = Pantalla::where('name',$pantalla)->first();
-            $articulo = PantallaCliente::create([
-                'pantalla_id' => $busqueda->id,
-                'user_id' => $request->cliente,
-            ]);
+            $articulo= PantallaCliente::firstOrCreate(['pantalla_id' => $busqueda->id, 'user_id' => $request->cliente]);
         }
 
        return 'ok';

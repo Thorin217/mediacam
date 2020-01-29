@@ -15,7 +15,7 @@
     @if(isset($articulos))
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-8 col-xs-12 col-12">
-                <div class="card">
+                <div class="card shadow shadow-lg">
                     <div class="card-header">
                         <strong>Artículos activos del cliente</strong>
                     </div>

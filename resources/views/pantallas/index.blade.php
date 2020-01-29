@@ -63,9 +63,6 @@
         @elseif(Auth::user()->role_id == 3 || Auth::user()->role_id == 1)
             <client-component :user="{{$user}}" :paises="{{$paises}}" :pantallas="{{$pantallas}}"></client-component>
         @endif
-        @if(count($pantallas) <= 0)
-            <p class="text-center">No se encontraron artículos</p>
-        @endif
 @endsection
 
 @section('scripts')

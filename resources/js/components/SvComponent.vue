@@ -1,6 +1,6 @@
 <template>
 <div class="cameras mt-4">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" v-if="screns.length > 0">
         <div class="col-6">
              <input class="form-control" type="search" v-model="name" placeholder="Buscar Pantallas" aria-label="Search">
         </div>

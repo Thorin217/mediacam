@@ -77,11 +77,11 @@
                 @endif
             </div>
         </div>
-        @if(isset($mensaje))
+        @if(Auth::user()->status == 'no-activo')
         <div class="row justify-content-center">
             <div class="col-10">
                     <div class="alert alert-warning" >
-                        {{ $mensaje }}
+                        ¡Por el momento no tienes pautas activas. Escríbenos Para contratar nuestros servicios o para notificar algún problema!
                     </div>
             </div>
         </div>

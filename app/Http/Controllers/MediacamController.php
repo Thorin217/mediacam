@@ -19,13 +19,10 @@ class MediacamController extends Controller
 
     public function contactos(){
         //busca el usuario y su pais
-        if(Auth::user()->status == 'no-activo'){
-            $mensaje = '¡Por el momento no tienes pautas activas. Escríbenos Para contratar nuestros servicios o para notificar algún problema!';
-        }
         $user = User::find(Auth::user()->id);
         $pais = Country::find($user->country_id);
 
-        return view('contacts',compact('user','pais','mensaje'));
+        return view('contacts', compact('user','pais'));
     }
 
     public function contactar(Request $request){
